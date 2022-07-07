@@ -3,26 +3,19 @@ const contentTableConfig = {
   showColumnIndex: true,
   propsList: [
     { prop: "name", label: "商品名称", minWidth: "70" },
+    { prop: "categoryId", label: "商品类别", minWidth: "60" },
     { prop: "oldPrice", label: "原价格", minWidth: "70" },
     { prop: "newPrice", label: "现价格", minWidth: "90" },
     { prop: "desc", label: "商品描述", minWidth: "60" },
+
     { prop: "imgUrl", label: "商品图片", minWidth: "100", slotName: "image" },
     {
       prop: "inventoryCount",
       label: "库存",
       minWidth: "50"
     },
-    {
-      prop: "saleCount",
-      label: "销售数量",
-      minWidth: "60"
-    },
-    {
-      prop: "favorCount",
-      label: "优惠数量",
-      minWidth: "60"
-    },
-    { prop: "address", label: "仓库地址", minWidth: "60" },
+    { prop: "address", label: "地址", minWidth: "60" },
+
     {
       prop: "createAt",
       label: "创建时间",

@@ -20,7 +20,11 @@ const systemModule: Module<ISystemType, IRootState> = {
       goodsList: [],
       goodsCount: 0,
       menuList: [],
-      menuCount: 0
+      menuCount: 0,
+      departmentList: [],
+      departmentCount: 0,
+      categoryList: [],
+      categoryCount: 0
     }
   },
   getters: {
@@ -68,6 +72,18 @@ const systemModule: Module<ISystemType, IRootState> = {
     },
     changeMenuCount(state, menuCount: any) {
       state.menuCount = menuCount
+    },
+    changeDepartmentList(state, dapartmentList: any) {
+      state.departmentList = dapartmentList
+    },
+    changeDepartmentCount(state, departmentCount: any) {
+      state.departmentCount = departmentCount
+    },
+    changeCategoryList(state, categoryList: any) {
+      state.categoryList = categoryList
+    },
+    changeCategoryCount(state, categoryCount: any) {
+      state.categoryCount = categoryCount
     }
   },
   actions: {
@@ -88,7 +104,7 @@ const systemModule: Module<ISystemType, IRootState> = {
       const { list, totalCount } = (
         await getPageListData(pageUrl, payload.queryInfo)
       ).data
-
+      console.log(list)
       // 3. 修改数据
       const newPageName = pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
       commit(`change${newPageName}List`, list)

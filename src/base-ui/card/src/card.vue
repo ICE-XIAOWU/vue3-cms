@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <template #header>
         <slot name="header">
-          <span>{{ title }}</span>
+          <span class="title">{{ title }}</span>
         </slot>
       </template>
       <slot></slot>
@@ -27,4 +27,9 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+</style>

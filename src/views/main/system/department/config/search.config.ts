@@ -1,18 +1,21 @@
 import { IForm } from "@/base-ui/form/types"
 export const searchFormConfig: IForm = {
   labelWidth: "120px",
+  itemStyle: {
+    padding: "20px 40px"
+  },
   formItems: [
     {
       field: "name",
       type: "input",
-      name: "商品名称",
-      placeholder: "请输入商品名称"
+      name: "部门名称",
+      placeholder: "请输入部门名称"
     },
     {
-      field: "categoryId",
-      type: "select",
-      name: "商品类别",
-      placeholder: "请输入商品类别"
+      field: "leader",
+      type: "input",
+      name: "部门领导",
+      placeholder: "请输入部门领导"
     },
     {
       field: "createAt",

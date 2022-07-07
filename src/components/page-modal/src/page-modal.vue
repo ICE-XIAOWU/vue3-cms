@@ -2,12 +2,16 @@
   <div class="page-modal">
     <el-dialog
       v-model="centerDialogVisible"
-      title="新建用户"
       width="30%"
       center
       :destroy-on-close="true"
     >
-      <iuce-form v-bind="modalConfig" v-model="formData"></iuce-form>
+      <iuce-form v-bind="modalConfig" v-model="formData">
+        <template #header>
+          <h2>操作数据</h2>
+        </template>
+        <template #footer></template>
+      </iuce-form>
       <slot></slot>
       <template #footer>
         <span class="dialog-footer">

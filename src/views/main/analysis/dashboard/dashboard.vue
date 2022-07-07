@@ -72,9 +72,7 @@ export default defineComponent({
     const store = useStore()
     store.dispatch("analysis/getDashboardDataAction")
 
-    const amountList = computed(() => {
-      return store.state.analysis.goodsAmountList
-    })
+    const amountList = computed(() => store.state.analysis.goodsAmountList)
 
     const goodsCounts = computed(() => {
       return store.state.analysis.goodsCategoryCount.map((item) => {

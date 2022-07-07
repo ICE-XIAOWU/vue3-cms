@@ -11,11 +11,8 @@
       ref="pageContentRef"
       @btn-edit-click="handleEditData"
       @btn-new-click="handleNewData"
+      title="新建角色"
     >
-      <template #handler>
-        <el-button type="primary">新建角色</el-button>
-        <el-button type="danger">删除角色</el-button>
-      </template>
     </page-content>
     <page-modal
       :modalConfig="modalConfig"

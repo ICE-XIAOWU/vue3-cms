@@ -2,7 +2,7 @@
   <div class="nav-menu">
     <div class="logo">
       <img src="~@/assets/img/logo.svg" alt="" />
-      <span v-if="!isCollapse">Vue3+TS</span>
+      <span v-if="!isCollapse">IUCE_CMS</span>
     </div>
     <el-menu
       :collapse="isCollapse"

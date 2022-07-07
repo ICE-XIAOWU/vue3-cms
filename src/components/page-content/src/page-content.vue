@@ -10,9 +10,13 @@
     >
       <!-- 1. 头部插槽 -->
       <template #slotHandler v-if="isCreate">
-        <el-button type="primary" @click="handleNewBtnClick"
-          >新建用户</el-button
+        <el-button
+          v-if="pageName !== 'menu'"
+          type="primary"
+          @click="handleNewBtnClick"
         >
+          {{ title }}
+        </el-button>
       </template>
 
       <!-- 2. 表格的插槽 -- 固定 -->
@@ -94,6 +98,10 @@ export default defineComponent({
     contentTableConfig: {
       type: Object,
       required: true
+    },
+    title: {
+      type: String,
+      default: "新建用户"
     }
   },
   components: {
@@ -133,9 +141,9 @@ export default defineComponent({
     getPageData()
 
     // 3. 获取数据
-    const dataList = computed(() =>
-      store.getters[`system/getPageListData`](props.pageName)
-    )
+    const dataList = computed(() => {
+      return store.getters[`system/getPageListData`](props.pageName)
+    })
     const dataCount = computed(() =>
       store.getters[`system/getPageCountData`](props.pageName)
     )

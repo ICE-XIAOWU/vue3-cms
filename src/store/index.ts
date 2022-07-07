@@ -13,7 +13,8 @@ const store = createStore<IRootState>({
     return {
       entireDepartment: [],
       entireRole: [],
-      entireUserMenus: []
+      entireUserMenus: [],
+      entireGoodsList: []
     }
   },
   getters: {},
@@ -24,8 +25,11 @@ const store = createStore<IRootState>({
     chanegEntireRole(state, roleList: any) {
       state.entireRole = roleList
     },
-    chanegEntireUserMenus(state, entireUserMenus: any) {
-      state.entireUserMenus = entireUserMenus
+    chanegEntireUserMenus(state, userMenus: any) {
+      state.entireUserMenus = userMenus
+    },
+    chanegEntireGoodsList(state, goodsList: any) {
+      state.entireGoodsList = goodsList
     }
   },
   actions: {
@@ -49,10 +53,17 @@ const store = createStore<IRootState>({
       })
       const { list: menusList } = userMenusResult.data
 
+      const goodsResult = await getPageListData("/category/list", {
+        offset: 0,
+        size: 1000
+      })
+      const { list: goodsList } = goodsResult.data
+
       // 2. 修改数据
       commit("chanegEntireDepartment", departmentList)
       commit("chanegEntireRole", roleList)
       commit("chanegEntireUserMenus", menusList)
+      commit("chanegEntireGoodsList", goodsList)
     }
   },
   modules: {

@@ -18,12 +18,6 @@ const contentTableConfig = {
       label: "更新时间",
       minWidth: "120",
       slotName: "updateAt"
-    },
-    {
-      prop: "operate",
-      label: "操作",
-      width: "170",
-      slotName: "operate"
     }
   ],
   childrenProps: {

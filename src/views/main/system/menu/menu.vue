@@ -1,9 +1,6 @@
 <template>
   <div class="menu">
     <page-content :contentTableConfig="contentTableConfig" pageName="menu">
-      <template #handler>
-        <el-button type="primary">新建菜单</el-button>
-      </template>
     </page-content>
   </div>
 </template>

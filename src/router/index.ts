@@ -47,6 +47,5 @@ router.beforeEach((to) => {
 // 给vuex赋值
 export function setupStore() {
   store.dispatch("login/loadLocalLogin")
-  store.dispatch("analysis/getDashboardDataAction")
 }
 export default router

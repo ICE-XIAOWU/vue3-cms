@@ -5,14 +5,8 @@ export const searchFormConfig: IForm = {
     {
       field: "name",
       type: "input",
-      name: "商品名称",
-      placeholder: "请输入商品名称"
-    },
-    {
-      field: "categoryId",
-      type: "select",
-      name: "商品类别",
-      placeholder: "请输入商品类别"
+      name: "分类名称",
+      placeholder: "请输入分类名称"
     },
     {
       field: "createAt",

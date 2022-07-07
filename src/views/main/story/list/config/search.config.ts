@@ -3,16 +3,10 @@ export const searchFormConfig: IForm = {
   labelWidth: "120px",
   formItems: [
     {
-      field: "name",
+      field: "title",
       type: "input",
-      name: "商品名称",
-      placeholder: "请输入商品名称"
-    },
-    {
-      field: "categoryId",
-      type: "select",
-      name: "商品类别",
-      placeholder: "请输入商品类别"
+      name: "故事名字",
+      placeholder: "请输入故事名字"
     },
     {
       field: "createAt",
