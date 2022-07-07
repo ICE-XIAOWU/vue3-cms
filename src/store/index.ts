@@ -1,22 +1,64 @@
 import { createStore, useStore as vuexStore } from "vuex"
 import { Store } from "vuex"
+import { getPageListData } from "@/service/main/system"
 
 import login from "./login/login"
+import system from "./main/system"
+import analysis from "./main/analysis"
 
 import type { IRootState, IStoreType } from "./type"
 
 const store = createStore<IRootState>({
   state() {
     return {
-      name: "store",
-      age: 19
+      entireDepartment: [],
+      entireRole: [],
+      entireUserMenus: []
     }
   },
   getters: {},
-  mutations: {},
-  actions: {},
+  mutations: {
+    chanegEntireDepartment(state, departmentList: any) {
+      state.entireDepartment = departmentList
+    },
+    chanegEntireRole(state, roleList: any) {
+      state.entireRole = roleList
+    },
+    chanegEntireUserMenus(state, entireUserMenus: any) {
+      state.entireUserMenus = entireUserMenus
+    }
+  },
+  actions: {
+    async getInitialDataAction({ commit }) {
+      // 1. 请求部门数据
+      const departmentResult = await getPageListData("/department/list", {
+        offset: 0,
+        size: 1000
+      })
+      const { list: departmentList } = departmentResult.data
+
+      const roleResult = await getPageListData("/role/list", {
+        offset: 0,
+        size: 1000
+      })
+      const { list: roleList } = roleResult.data
+
+      const userMenusResult = await getPageListData("/menu/list", {
+        offset: 0,
+        size: 1000
+      })
+      const { list: menusList } = userMenusResult.data
+
+      // 2. 修改数据
+      commit("chanegEntireDepartment", departmentList)
+      commit("chanegEntireRole", roleList)
+      commit("chanegEntireUserMenus", menusList)
+    }
+  },
   modules: {
-    login
+    login,
+    system,
+    analysis
   }
 })
 

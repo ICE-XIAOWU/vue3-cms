@@ -6,7 +6,7 @@ import {
 } from "@/service/login/login"
 import LocalCache from "@/utils/cache"
 import router from "@/router/index"
-import { mapMenusToRoutes } from "@/utils/map-menus"
+import { mapMenusToRoutes, mapMenusToPermissions } from "@/utils/map-menus"
 
 import type { IRootState } from "../type"
 import type { ILoginState } from "./type"
@@ -18,7 +18,8 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: "",
       userInfo: {},
-      userMenus: []
+      userMenus: [],
+      permissions: []
     }
   },
   getters: {},
@@ -34,20 +35,26 @@ const loginModule: Module<ILoginState, IRootState> = {
 
       // 映射菜单路由
       const routes = mapMenusToRoutes(userMenus)
-      // 动态注册路由
-      // const newRoutes = routes.splice(0, 2)
-      // newRoutes.forEach((route) => {
-      //   router.addRoute("main", route)
-      // })
+      // 动态注册路由`
+
+      routes.forEach((route) => {
+        router.addRoute("main", route)
+      })
+
+      // 获取权限
+      const permissions = mapMenusToPermissions(userMenus)
+      state.permissions = permissions
     }
   },
   actions: {
-    async accountLoginAction({ commit }, payload: IAccountType) {
+    async accountLoginAction({ commit, dispatch }, payload: IAccountType) {
       // 1. 请求登录逻辑
       const loginResult = await accountLoginRequest(payload)
       const { id, token } = loginResult.data
       commit("changeToken", token)
       LocalCache.setCache("token", token)
+      // 1.1 请求页面初始数据
+      dispatch("getInitialDataAction", null, { root: true })
 
       // 2. 请求用户数据
       const userInfoResult = await requestUserInfoById(id)
@@ -63,10 +70,11 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 4. 跳转到首页
       router.push("/main")
     },
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = LocalCache.getCache("token")
       if (token) {
         commit("changeToken", token)
+        dispatch("getInitialDataAction", null, { root: true })
       }
 
       const userInfo = LocalCache.getCache("userInfo")

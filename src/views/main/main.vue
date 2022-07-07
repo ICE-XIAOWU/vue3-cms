@@ -8,7 +8,11 @@
         <el-header class="main-header">
           <nav-header @menus-click="menusClick" />
         </el-header>
-        <el-main class="main-content">Main</el-main>
+        <el-main class="main-content">
+          <div class="page-content">
+            <router-view></router-view>
+          </div>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -68,6 +72,11 @@ export default defineComponent({
 
     .main-content {
       background-color: #f5f5f5;
+
+      .page-content {
+        background-color: #fff;
+        border-radius: 5px;
+      }
     }
   }
 }

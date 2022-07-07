@@ -12,6 +12,7 @@ const IuceRuequest = new IUCERequest({
       if (token) {
         config.headers!.Authorization = `Bearer ${token}`
       }
+
       return config
     },
     requestInterceptorsCatch: (err) => {
@@ -23,7 +24,8 @@ const IuceRuequest = new IUCERequest({
     responseInterceptorsCatch: (err) => {
       return err
     }
-  }
+  },
+  showloading: false
 })
 
 export default IuceRuequest

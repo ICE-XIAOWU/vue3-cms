@@ -6,7 +6,7 @@
     </div>
     <el-menu
       :collapse="isCollapse"
-      default-active="2"
+      :default-active="currentMenuActive"
       background-color="#0c2135"
       text-color="#b7bdc3"
       active-text-color="#0a60bd"
@@ -48,9 +48,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue"
+import { defineComponent, computed, ref } from "vue"
 import { useStore } from "@/store/index"
 import { useRouter } from "vue-router"
+import { useRoute } from "vue-router"
+
+import { pathMapToMenu } from "@/utils/map-menus"
 
 export default defineComponent({
   props: {
@@ -60,8 +63,12 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const store = useStore()
     const userMenus = computed(() => store.state.login.userMenus)
+
+    const menu = pathMapToMenu(userMenus.value, route.path)
+    const currentMenuActive = ref(menu.id + "")
 
     const handleMenuItemClick = (item: any) => {
       router.push({
@@ -70,6 +77,7 @@ export default defineComponent({
     }
     return {
       userMenus,
+      currentMenuActive,
       handleMenuItemClick
     }
   }

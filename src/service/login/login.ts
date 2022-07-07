@@ -1,5 +1,6 @@
 import IuceRuequest from "../index"
-import type { IAccountType, ILoginResult, IDateType } from "./type"
+import type { IAccountType, ILoginResult } from "./type"
+import type { IDateType } from "../types"
 
 enum LoginAPI {
   AccountLogin = "/login",

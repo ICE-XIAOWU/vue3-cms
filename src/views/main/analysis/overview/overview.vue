@@ -1,6 +1,6 @@
 <template>
   <div class="overview">
-    <h2>overview</h2>
+    <h2>页面暂未开发，请浏览其他页面</h2>
   </div>
 </template>
 

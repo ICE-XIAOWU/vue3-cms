@@ -1,16 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 import type { RouteRecordRaw } from "vue-router"
 import LocalCache from "@/utils/cache"
+import { firstMenu } from "@/utils/map-menus"
 import store from "@/store/index"
 
-import user from "@/views/main/system/user/user.vue"
-// import role from ""
-
 const routes: RouteRecordRaw[] = [
-  {
-    path: "/",
-    redirect: "/main"
-  },
   {
     name: "login",
     path: "/login",
@@ -19,19 +13,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: "main",
     path: "/main",
-    component: () => import("@/views/main/main.vue"),
-    children: [
-      {
-        name: "user",
-        path: "/main/system/user",
-        component: () => import("@/views/main/system/user/user.vue")
-      },
-      {
-        name: "role",
-        path: "/main/system/role",
-        component: () => import("@/views/main/system/role/role.vue")
-      }
-    ]
+    component: () => import("@/views/main/main.vue")
   },
   {
     name: "not-found",
@@ -42,7 +24,7 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory()
+  history: createWebHashHistory()
 })
 
 router.beforeEach((to) => {
@@ -51,15 +33,20 @@ router.beforeEach((to) => {
     if (!token) {
       return "/login"
     }
-  } else {
-    if (token) {
-      return "/main"
-    }
+  }
+
+  if (to.path === "/main") {
+    return firstMenu.url
+  }
+
+  if (to.path === "/") {
+    return "/main"
   }
 })
 
 // 给vuex赋值
 export function setupStore() {
   store.dispatch("login/loadLocalLogin")
+  store.dispatch("analysis/getDashboardDataAction")
 }
 export default router
